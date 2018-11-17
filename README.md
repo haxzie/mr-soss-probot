@@ -1,6 +1,6 @@
 # PR-Welcome-App
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that App to welcome PRs
+> A GitHub App built with [Probot](https://github.com/probot/probot) that creates comment on PR with netlify deploy preview link.
 
 ## Setup
 

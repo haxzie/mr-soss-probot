@@ -17,7 +17,8 @@
     "start": "probot run ./index.js",
     "lint": "standard --fix",
     "test": "jest && standard",
-    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage",
+    "deploy": "now --dotenv=.env --public"
   },
   "dependencies": {
     "probot": "^7.2.0"

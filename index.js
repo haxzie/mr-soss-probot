@@ -1,5 +1,6 @@
-const newIssueController = require('./bin/newIssue');
-//const newPullRequestController = require('./bin/newPullRequest');
+const fs = require('fs');
+const format = require('string-format');
+format.extend(String.prototype, {});
 
 module.exports = app => {
   app.log('Yay, the app was loaded!')
@@ -39,11 +40,18 @@ module.exports = app => {
   });
 
   app.on('pull_request.opened', async context => {
+    const pullRequest = context.payload.pull_request;
+    let prOpener = pullRequest.head.user.login;
+
+    console.log(JSON.stringify(pullRequest));
     context.log("PR opened");
-    let prNumber = context.issue().number;
+    console.log(JSON.stringify(context));
+    //let prNumber = context.issue().number;
     const config = await context.config('config.yml');
     if (config && config.newPullRequestComment) {
+
       let message = config.newPullRequestComment;
+      message.format(prOpener);
       return context.github.issues.createComment(context.issue({
         body: message
       }));

@@ -1,14 +1,14 @@
 newIsuueWelcomeComment: >
-  Hey @%s :wave:, Thanks for opening your first issue! Our maintainers will get back to you in a while :smile:
+  Hey @{0} :wave:, Thanks for opening your first issue! Our maintainers will get back to you in a while :smile:
 
 newIssueComment: >
-  Thanks for opening the issue @%s , Our maintainers will get back to you in a while :smile:
+  Thanks for opening the issue @{0} , Our maintainers will get back to you in a while :smile:
 
 newPullRequestComment: >
-  Awesome! Thanks for opening your first Pull Request here, @%s :heart:
+  Awesome! Thanks for opening your first Pull Request here, @{0} :heart:
 
 pullRequestComment: >
-  Hello @%s, Thanks for the PR :claps: Have a cup of coffee while a maintainer reviews your changes.
+  Hello @{0}, Thanks for the PR :claps: Have a cup of coffee while a maintainer reviews your changes.
 
 deployPreviewReady: >
-  Woohoo! A [deploy preview](%s) of the changes from this PR is ready! Fingers crossed :crossed_fingers:
+  Woohoo! A [deploy preview]({0}) of the changes from this PR is ready! Fingers crossed :crossed_fingers:

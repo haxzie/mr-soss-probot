@@ -1,5 +1,5 @@
-# Probot Netlify Deploy Preview Notifier
-> A GitHub App built with [Probot](https://github.com/probot/probot) that creates comment on PR with netlify deploy preview link.
+# Probot Welcome Bot
+> A GitHub App built with [Probot](https://github.com/probot/probot) that creates welcome comments on PRs and Issues.
 
 ## Setup
 

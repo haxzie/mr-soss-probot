@@ -1,29 +1,27 @@
-const fs = require('fs');
-const format = require('string-format');
-format.extend(String.prototype, {});
-
 module.exports = app => {
   app.log('Yay, the app was loaded!')
-  
+
+  /**
+   * Welcomes the issue creator, sparkles if it's the first time :)
+   */
   app.on('issues.opened', async context => {
+    const issue = context.payload.issue;
+    const creator = issue.user.login;
+
     // get the list of all the issues a user created in this repository
     // referred from https://github.com/behaviorbot/new-issue-welcome
     const response = await context.github.issues.getForRepo(context.repo({
       state: 'all',
-      creator: context.payload.issue.user.login,
+      creator: creator,
     }));
     const countIssue = response.data.filter(data => !data.pull_request);
 
     // check if this is the user's first issue in this repository
     if (countIssue.length === 1) {
       try {
-        const config = await context.config('config.yml');
-        if (config && config.newIssueWelcomeComment) {
-          let message = config.newIssueWelcomeComment;
           context.github.issues.createComment(context.issue({
-            body: message
+            body: `Hey @${creator} :wave:, Thanks for opening your first issue! Our maintainers will get back to you in a while :smile:`
           }));
-        }
       } catch (err) {
         if (err.code !== 404) {
           throw err;
@@ -31,29 +29,41 @@ module.exports = app => {
       }
     } else {
       // User has previous issues opened/closed in this repository, no need of welcome, it's oua boi!
-      let message = config.newIssueComment;
-      const issueComment = context.issue({
-        body: message
-      });
-      return context.github.issues.createComment(issueComment)
+      return context.github.issues.createComment(context.issue({
+        body: `Thanks for opening the issue @${creator} , Our maintainers will get back to you in a while :smile:`
+      }));
     }
   });
 
+  /**
+   * Welcomes the PR creator, sparkles if it's the first time :)
+   */
   app.on('pull_request.opened', async context => {
     const pullRequest = context.payload.pull_request;
-    let prOpener = pullRequest.head.user.login;
+    let creator = pullRequest.user.login;
 
-    console.log(JSON.stringify(pullRequest));
-    context.log("PR opened");
-    console.log(JSON.stringify(context));
-    //let prNumber = context.issue().number;
-    const config = await context.config('config.yml');
-    if (config && config.newPullRequestComment) {
+    // get the list of all the issues a user created in this repository
+    const response = await context.github.issues.getForRepo(context.repo({
+      state: 'all',
+      creator: creator,
+    }));
+    const countPullRequest = response.data.filter(data => !data.issue);
 
-      let message = config.newPullRequestComment;
-      message.format(prOpener);
+    if (countPullRequest.length === 1) {
+      try {
+        context.github.issues.createComment(context.issue({
+          body: `Awesome! Thanks for opening your first Pull Request here @${creator} :heart:
+          A maintainer is on his way to review your Pull Request.`
+        }));
+      } catch (err) {
+        if (err.code !== 404) {
+          throw err;
+        }
+      }
+    } else {
+      // User has previous PRs opened/closed in this repository, no need of welcome, it's oua boi!
       return context.github.issues.createComment(context.issue({
-        body: message
+        body: `Hello @${creator}, Thanks for the PR :clap: Have a cup of coffee while a maintainer reviews your changes.`
       }));
     }
   });

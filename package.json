@@ -18,7 +18,7 @@
     "lint": "standard --fix",
     "test": "jest && standard",
     "test:watch": "jest --watch --notify --notifyMode=change --coverage",
-    "deploy": "now --dotenv=.env --public"
+    "deploy": "now --dotenv=.env.production --public"
   },
   "dependencies": {
     "probot": "^7.2.0",

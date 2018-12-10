@@ -1,4 +1,4 @@
-[![forthebadge](https://forthebadge.com/images/badges/contains-cat-gifs.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/contains-cat-gifs.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://forthebadge.com)
 # Probot Welcome Bot
 > A GitHub App built with [Probot](https://github.com/probot/probot) that creates welcome comments on PRs and Issues.
 
